@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { handleError, handleSuccess } from '../utils';
 import { useEffect } from 'react'
 import { NavLink } from "react-router-dom";
+import logo from '../assets/logo.png'
 
 
 
@@ -21,15 +22,15 @@ const Navbar = () => {
         setLoggedInUser(localStorage.getItem('loggedInUser'))
     }, [])
 
-  const [showMediaIcons, setShowMediaIcons] = useState(false);
-  const handleLogout = (e) => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('loggedInUser');
-    handleSuccess('User Loggedout');
-    setTimeout(() => {
-        navigate('/login');
-    }, 1000)
-}
+    const handleLogout = (e) => {
+          localStorage.removeItem('token');
+          localStorage.removeItem('loggedInUser');
+          handleSuccess('User Loggedout');
+          setTimeout(() => {
+              navigate('/login');
+          }, 1000)
+        }
+
 
   return (
     <div className="main">
@@ -37,37 +38,17 @@ const Navbar = () => {
       <nav className="main-nav">
         {/* 1st logo part  */}
         <div className="logo">
-          <h2>
-            <span>S</span>MIT
-          </h2>
+        <img src={logo}/>
         </div>
 
         {/* 2nd menu part  */}
-        <div
-          className={
-            showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
-          }>
-          <ul>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/about">about</NavLink>
-            </li>
-            <li>
-              <NavLink to="/service">services</NavLink>
-            </li>
-            <li>
-              <NavLink to="/contact">contact</NavLink>
-            </li>
-          </ul>
-        </div>
+      
 
 
           
             <div className="user-info">
                 
-                <h1>Welcome {loggedInUser}</h1>
+                <h1> {loggedInUser}</h1>
                 <button onClick={handleLogout}>Logout</button>
            </div>
 

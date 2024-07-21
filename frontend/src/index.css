@@ -70,3 +70,13 @@ button{
   cursor: pointer;
   margin: 10px 0;
 }
+
+.container{
+  margin: 20px;
+  width: 500px;
+  transition: transform 0.3s ease-in-out;
+}
+.container:hover{
+  transform: scale(1.05);
+  cursor: pointer;
+}
