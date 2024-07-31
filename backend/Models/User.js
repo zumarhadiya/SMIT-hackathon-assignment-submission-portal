@@ -14,6 +14,11 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true,
+    },
+    userType: {   // New field for user type
+        type: String,
+        required: true,
+        enum: ['student', 'teacher'] // Ensures only 'student' or 'teacher' can be assigned
     }
 });
 

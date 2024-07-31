@@ -5,17 +5,16 @@ import { handleError, handleSuccess } from '../utils';
 import logo from '../assets/logo.png'
 
 function Signup() {
-
     const [signupInfo, setSignupInfo] = useState({
         name: '',
         email: '',
-        password: ''
+        password: '',
+        userType: ''  // New state for user type
     })
 
     const navigate = useNavigate();
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(name, value);
         const copySignupInfo = { ...signupInfo };
         copySignupInfo[name] = value;
         setSignupInfo(copySignupInfo);
@@ -23,9 +22,9 @@ function Signup() {
 
     const handleSignup = async (e) => {
         e.preventDefault();
-        const { name, email, password } = signupInfo;
-        if (!name || !email || !password) {
-            return handleError('name, email and password are required')
+        const { name, email, password, userType } = signupInfo;
+        if (!name || !email || !password || !userType) {
+            return handleError('All fields are required')
         }
         try {
             const url = `http://localhost:8080/auth/signup`;
@@ -49,15 +48,14 @@ function Signup() {
             } else if (!success) {
                 handleError(message);
             }
-            console.log(result);
         } catch (err) {
             handleError(err);
         }
     }
+
     return (
         <>
             <img className='smit-logo' src={logo} />
-
             <div className='container'>
                 <h1>Signup</h1>
                 <form onSubmit={handleSignup}>
@@ -92,8 +90,20 @@ function Signup() {
                             value={signupInfo.password}
                         />
                     </div>
+                    <div>
+                        <label htmlFor='userType'>User Type</label>
+                        <select
+                            name='userType'
+                            onChange={handleChange}
+                            value={signupInfo.userType}
+                        >
+                            <option value=''>Select user type...</option>
+                            <option value='student'>Student</option>
+                            <option value='teacher'>Teacher</option>
+                        </select>
+                    </div>
                     <button type='submit'>Signup</button>
-                    <span>Already have an account ?
+                    <span>Already have an account?
                         <Link to="/login">Login</Link>
                     </span>
                 </form>
@@ -103,4 +113,4 @@ function Signup() {
     )
 }
 
-export default Signup
+export default Signup;

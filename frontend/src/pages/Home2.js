@@ -4,13 +4,13 @@ import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 
 
-function Home() {
+function Home2() {
     return (
         <div>
             <Navbar />
             {/* <ClickableContainer/> */}
             <section className="hero-section">
-                
+                <h1>Select course to post assignment</h1>
             <Link to="/dashboard1">
             <div className='container' >
                     <h2>Web And App Development</h2>
@@ -34,7 +34,7 @@ function Home() {
     )
 }
 
-export default Home
+export default Home2
 {/* {
     products && products?.map((item, index) => (
         <ul key={index}>

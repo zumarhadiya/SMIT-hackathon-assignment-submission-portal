@@ -1,25 +1,33 @@
-import React, { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-function RefrshHandler({ setIsAuthenticated }) {
-    const location = useLocation();
+const RefrshHandler = ({ setIsAuthenticated }) => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
-        if (localStorage.getItem('token')) {
+        const token = localStorage.getItem('token');
+        const userType = localStorage.getItem('userType');
+
+        if (token) {
             setIsAuthenticated(true);
-            if (location.pathname === '/' ||
-                location.pathname === '/login' ||
-                location.pathname === '/signup'
-            ) {
-                navigate('/home', { replace: false });
+            if (location.pathname === '/login' || location.pathname === '/signup') {
+                if (userType === 'student') {
+                    navigate('/home');
+                } else if (userType === 'teacher') {
+                    navigate('/home2');
+                }
+            }
+        } else {
+            setIsAuthenticated(false);
+            // Allow access to login and signup pages without redirection
+            if (location.pathname !== '/login' && location.pathname !== '/signup') {
+                navigate('/login');
             }
         }
-    }, [location, navigate, setIsAuthenticated])
+    }, [setIsAuthenticated, navigate, location.pathname]);
 
-    return (
-        null
-    )
-}
+    return null;
+};
 
-export default RefrshHandler
+export default RefrshHandler;
