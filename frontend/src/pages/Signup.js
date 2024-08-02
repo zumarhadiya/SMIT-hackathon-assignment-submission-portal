@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from '../utils';
 import logo from '../assets/logo.png'
+import './signup.css';
 
 function Signup() {
     const [signupInfo, setSignupInfo] = useState({
@@ -91,7 +92,7 @@ function Signup() {
                         />
                     </div>
                     <div>
-                        <label htmlFor='userType'>User Type</label>
+                        <label htmlFor='userType'>I am</label>
                         <select
                             name='userType'
                             onChange={handleChange}

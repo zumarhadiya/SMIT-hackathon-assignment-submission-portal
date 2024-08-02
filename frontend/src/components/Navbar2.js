@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import logo from '../assets/logo.png';
 import './navbar.css'; 
 
-const Navbar = () => {
+const Navbar2 = () => {
     const [loggedInUser, setLoggedInUser] = useState('');
     const navigate = useNavigate();
 
@@ -33,16 +33,16 @@ const Navbar = () => {
                 {/* Menu Section */}
                 <ul className="navbar-menu">
                     <li>
-                        <NavLink to="/home">Home</NavLink>
+                        <NavLink to="/home2">Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard1">Web and App Development</NavLink>
+                        <NavLink to="/dashboardt1">Web and App Development</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard2">Graphic Designing</NavLink>
+                        <NavLink to="/dashboardt2">Graphic Designing</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard3">AI & Chatbot</NavLink>
+                        <NavLink to="/dashboardt3">AI & Chatbot</NavLink>
                     </li>
                     {/* <li>
                         <NavLink to="/assignment-submissions">Assignment Submissions</NavLink>
@@ -62,4 +62,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default Navbar2;

@@ -1,0 +1,121 @@
+/* Home2.css */
+
+.hero-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f0f8ff; /* Light background color for contrast */
+    margin-top: 60px; /* Space for the fixed navbar */
+}
+
+.dashboard-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.feature-card h2 {
+    font-size: 1.75rem;
+    color: #0077cc; /* Blue color for the headings */
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.feature-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background: linear-gradient(135deg, #0077cc, #00bfae); /* Blue-green gradient */
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.feature-button:hover {
+    background: linear-gradient(135deg, #005fae, #00a88e);
+    transform: scale(1.05);
+}
+
+.feature-button:active {
+    transform: scale(0.95);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-buttons {
+    margin: 20px 0;
+}
+
+.modal-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background: #0077cc; /* Blue color */
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 5px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.modal-button:hover {
+    background: #005fae;
+}
+
+.modal-button:active {
+    transform: scale(0.95);
+}
+
+.modal-close-button {
+    background: #ff4d4d; /* Red color for close button */
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.modal-close-button:hover {
+    background: #e60000;
+}

@@ -1,91 +1,173 @@
 import React, { useState } from 'react';
- // Import your CSS file for styling
 import '../App.css';
 import Navbar from '../components/Navbar';
 
 const Dashboard1 = () => {
-  const [assignments, setAssignments] = useState([]);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const initialAssignments = [
+    { id: 1, title: 'Assignment 1: HTML Basics', deadline: '2024-08-10', isSubmitted: false, fileName: null, file: null, link: null, grade: null },
+    { id: 2, title: 'Assignment 2: CSS Styling', deadline: '2024-08-15', isSubmitted: false, fileName: null, file: null, link: null, grade: null },
+    { id: 3, title: 'Assignment 3: JavaScript Functions', deadline: '2024-08-20', isSubmitted: false, fileName: null, file: null, link: null, grade: null },
+    { id: 4, title: 'Assignment 4: React Components', deadline: '2024-08-25', isSubmitted: false, fileName: null, file: null, link: null, grade: null },
+    { id: 5, title: 'Assignment 5: API Integration', deadline: '2024-08-30', isSubmitted: false, fileName: null, file: null, link: null, grade: null },
+  ];
 
-  // Function to handle file upload
+  const [assignments, setAssignments] = useState(initialAssignments);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [submissionType, setSubmissionType] = useState('file');
+  const [submittedLink, setSubmittedLink] = useState('');
+  const [filter, setFilter] = useState('all');
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
+    setErrorMessage('');
   };
 
-  // Function to handle assignment submission
-  const handleSubmit = () => {
-    // Simulating assignment submission to backend (not implemented in this example)
-    if (selectedFile) {
-      const newAssignment = {
-        id: assignments.length + 1,
-        fileName: selectedFile.name,
-        grade: null, // Initially null, teacher can later assign a grade
-        deadline: '2024-12-31', // Example deadline
-      };
-      setAssignments([...assignments, newAssignment]);
-      setSelectedFile(null); // Clear selected file after submission
+  const handleLinkChange = (event) => {
+    setSubmittedLink(event.target.value);
+    setErrorMessage('');
+  };
+
+  const handleSubmit = (assignmentId) => {
+    // Validation: Check if a file or link is provided
+    if (submissionType === 'file' && !selectedFile) {
+      setErrorMessage('A file is required for submission.');
+      return;
+    }
+    if (submissionType === 'link' && !submittedLink) {
+      setErrorMessage('A link is required for submission.');
+      return;
+    }
+
+    const updatedAssignments = assignments.map((assignment) => {
+      if (assignment.id === assignmentId) {
+        return {
+          ...assignment,
+          isSubmitted: true,
+          fileName: submissionType === 'file' ? selectedFile?.name : null,
+          file: submissionType === 'file' ? selectedFile : null,
+          link: submissionType === 'link' ? submittedLink : null,
+          grade: assignment.grade !== null ? assignment.grade : 'Not Graded',
+        };
+      }
+      return assignment;
+    });
+
+    setAssignments(updatedAssignments);
+    setSelectedFile(null);
+    setSubmittedLink('');
+    setErrorMessage('');
+  };
+
+  const handleDownload = (file) => {
+    if (file) {
+      const url = URL.createObjectURL(file);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = file.name;
+      link.click();
+      URL.revokeObjectURL(url);
     }
   };
 
-  // Function to handle grading assignment
-  const handleGradeAssignment = (id, grade) => {
-    // Update assignment grade (not implemented in this example)
-    const updatedAssignments = assignments.map((assignment) =>
-      assignment.id === id ? { ...assignment, grade: grade } : assignment
-    );
-    setAssignments(updatedAssignments);
-  };
+  const filteredAssignments = assignments.filter(assignment => {
+    if (filter === 'all') return true;
+    if (filter === 'pending') return !assignment.isSubmitted;
+    if (filter === 'completed') return assignment.isSubmitted;
+    return false;
+  });
 
   return (
     <>
-    <div className="dashboard-container">
+      <Navbar />
+      <div className="dashboard-container">
+        <h2>Web and App Development</h2>
 
-      <h2>Web and App Development</h2>
+        <div className="filter-dropdown">
+          <label>
+            Filter Assignments:
+            <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+              <option value="all">All</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+            </select>
+          </label>
+        </div>
 
-      {/* File upload form */}
-      <div className="upload-section">
-        <h3>Submit Assignment</h3>
-        <input type="file" onChange={handleFileChange} />
-        <button onClick={handleSubmit}>Submit</button>
+        <div className="assignments-section">
+          <h3>{filter.charAt(0).toUpperCase() + filter.slice(1)} Assignments</h3>
+          {filteredAssignments.length > 0 ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Deadline</th>
+                  <th>{filter === 'completed' ? 'Grade' : 'Submit'}</th>
+                  <th>Download</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredAssignments.map((assignment) => (
+                  <tr key={assignment.id}>
+                    <td>{assignment.id}</td>
+                    <td>{assignment.title}</td>
+                    <td>{assignment.deadline}</td>
+                    <td>
+                      {filter === 'completed' ? (
+                        <span>{assignment.grade ? assignment.grade : 'Not Graded'}</span>
+                      ) : (
+                        !assignment.isSubmitted ? (
+                          <div className="submit-section">
+                            <label>
+                              Submit as:
+                              <select value={submissionType} onChange={(e) => setSubmissionType(e.target.value)}>
+                                <option value="file">File</option>
+                                <option value="link">Link</option>
+                              </select>
+                            </label>
+
+                            {submissionType === 'file' && (
+                              <input type="file" onChange={handleFileChange} />
+                            )}
+                            {submissionType === 'link' && (
+                              <input
+                                type="text"
+                                value={submittedLink}
+                                onChange={handleLinkChange}
+                                placeholder="Enter assignment link"
+                              />
+                            )}
+                            <button
+                              onClick={() => handleSubmit(assignment.id)}
+                              disabled={submissionType === 'file' ? !selectedFile : !submittedLink}
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        ) : (
+                          <span>Submitted</span>
+                        )
+                      )}
+                    </td>
+                    <td>
+                      {assignment.isSubmitted && assignment.file ? (
+                        <button onClick={() => handleDownload(assignment.file)}>Download</button>
+                      ) : assignment.isSubmitted && assignment.link ? (
+                        <a href={assignment.link} target="_blank" rel="noopener noreferrer">View Link</a>
+                      ) : (
+                        <span>Not Available</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No {filter} assignments.</p>
+          )}
+        </div>
       </div>
-
-      {/* Assignment list */}
-      <div className="assignments-section">
-        <h3>Assignments</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>File Name</th>
-              <th>Marks Obtained</th>
-              <th>Deadline</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {assignments.map((assignment) => (
-              <tr key={assignment.id}>
-                <td>{assignment.id}</td>
-                <td>{assignment.fileName}</td>
-                <td>{assignment.grade !== null ? assignment.grade : 'Not graded'}</td>
-                <td>{assignment.deadline}</td>
-                <td>
-                  {assignment.grade === null && (
-                    <>
-                      <button className="grade-button" onClick={() => handleGradeAssignment(assignment.id, 'A')}>
-                        Grade A
-                      </button>
-                      {/* Add more grading buttons as needed */}
-                    </>
-                  )}
-                  <button className="download-button">Download</button> {/* Add download functionality */}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
     </>
   );
 };

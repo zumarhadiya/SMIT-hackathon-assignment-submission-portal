@@ -9,8 +9,11 @@ import RefrshHandler from './RefrshHandler';
 import Dashboard from './pages/Dashboard1';
 import Dashboard2 from './pages/Dashboard2';
 import Dashboard3 from './pages/Dashboard3';
+import Dashboardt1 from './pages/Dashboardt1';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Dashboardt2 from './pages/Dashboardt2';
+import Dashboardt3 from './pages/Dashboardt3';
 
 
 function App() {
@@ -39,6 +42,9 @@ function App() {
         <Route path='/dashboard1' element={<PrivateRoute element={<Dashboard />} />} />
         <Route path='/dashboard2' element={<PrivateRoute element={<Dashboard2 />} />} />
         <Route path='/dashboard3' element={<PrivateRoute element={<Dashboard3 />} />} />
+        <Route path='/dashboardt1' element={<PrivateRoute element={<Dashboardt1 />} />} />
+        <Route path='/dashboardt2' element={<PrivateRoute element={<Dashboardt2 />} />} />
+        <Route path='/dashboardt3' element={<PrivateRoute element={<Dashboardt3 />} />} />
       </Routes>
     </div>
   );
