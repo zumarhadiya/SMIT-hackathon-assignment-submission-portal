@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Dashboardt2 from './pages/Dashboardt2';
 import Dashboardt3 from './pages/Dashboardt3';
+import ViewSubmissions from './pages/ViewSubmissions';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
         <Route path='/dashboardt1' element={<PrivateRoute element={<Dashboardt1 />} />} />
         <Route path='/dashboardt2' element={<PrivateRoute element={<Dashboardt2 />} />} />
         <Route path='/dashboardt3' element={<PrivateRoute element={<Dashboardt3 />} />} />
+        <Route path='/view-submissions' element={<PrivateRoute element={<ViewSubmissions />} />} />
       </Routes>
     </div>
   );
