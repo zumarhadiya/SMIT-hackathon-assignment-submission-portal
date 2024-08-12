@@ -48,6 +48,7 @@
     transition: background 0.3s, transform 0.3s;
     border: none;
     cursor: pointer;
+    margin-right: 25px;
 }
 
 .feature-button:hover {
@@ -118,4 +119,60 @@
 
 .modal-close-button:hover {
     background: #e60000;
+}
+
+/* Existing CSS from Home2.css */
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-button {
+    display: block;
+    padding: 10px;
+    background-color: #0077cc; /* Blue */
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.modal-button:hover {
+    background-color: #005fa3; /* Darker blue */
+}
+
+.modal-close-button {
+    background-color: #ff4d4d; /* Red for close */
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
 }

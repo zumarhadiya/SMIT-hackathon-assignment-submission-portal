@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { handleError, handleSuccess } from '../utils';
 import { NavLink } from "react-router-dom";
 import logo from '../assets/logo.png';
 import './navbar.css'; 
 
 const Navbar = () => {
     const [loggedInUser, setLoggedInUser] = useState('');
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,10 +16,13 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('loggedInUser');
-        handleSuccess('User Logged out');
         setTimeout(() => {
             navigate('/login');
         }, 1000);
+    };
+
+    const toggleSidebar = () => {
+        setSidebarOpen(!sidebarOpen);
     };
 
     return (
@@ -31,32 +34,47 @@ const Navbar = () => {
                 </div>
 
                 {/* Menu Section */}
-                <ul className="navbar-menu">
+                <ul className={`navbar-menu ${sidebarOpen ? 'active' : ''}`}>
                     <li>
-                        <NavLink to="/home">Home</NavLink>
+                        <NavLink to="/home" onClick={toggleSidebar}>Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard1">Web and App Development</NavLink>
+                        <NavLink to="/dashboard1" onClick={toggleSidebar}>Web and App Development</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard2">Graphic Designing</NavLink>
+                        <NavLink to="/dashboard2" onClick={toggleSidebar}>Graphic Designing</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard3">AI & Chatbot</NavLink>
+                        <NavLink to="/dashboard3" onClick={toggleSidebar}>AI & Chatbot</NavLink>
                     </li>
-                    {/* <li>
-                        <NavLink to="/assignment-submissions">Assignment Submissions</NavLink>
-                    </li> */}
-                    {/* <li>
-                        <NavLink to="/profile">Profile</NavLink>
-                    </li> */}
                 </ul>
 
                 {/* User Info Section */}
                 <div className="user-info">
                     <h1>{loggedInUser}</h1>
                     <button className="feature-button" onClick={handleLogout}>Logout</button>
+                    <button className="navbar-toggle" onClick={toggleSidebar}>
+                        ☰
+                    </button>
                 </div>
+            </div>
+
+            {/* Sidebar for mobile view */}
+            <div className={`overlay-menu ${sidebarOpen ? 'open' : ''}`}>
+                <ul>
+                    <li>
+                        <NavLink to="/home" onClick={toggleSidebar}>Home</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard1" onClick={toggleSidebar}>Web and App Development</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard2" onClick={toggleSidebar}>Graphic Designing</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard3" onClick={toggleSidebar}>AI & Chatbot</NavLink>
+                    </li>
+                </ul>
             </div>
         </nav>
     );
