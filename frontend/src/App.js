@@ -19,10 +19,6 @@ import ViewSubmissions from './pages/ViewSubmissions';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // const PrivateRoute = ({ element }) => {
-  //   return isAuthenticated ? element : <Navigate to="/login" />
-  // }
   const PrivateRoute = ({ element }) => {
     const token = localStorage.getItem('token');
     return token ? element : <Navigate to="/login" />;
@@ -31,7 +27,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <RefrshHandler setIsAuthenticated={setIsAuthenticated} /> */}
       <RefrshHandler setIsAuthenticated={setIsAuthenticated} />
 
       <Routes>

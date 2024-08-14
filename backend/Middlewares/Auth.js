@@ -7,7 +7,7 @@ const ensureAuthenticated = (req, res, next) => {
             .json({ message: 'Unauthorized, JWT token is required' });
     }
 
-    const token = authHeader.split(' ')[1]; // Extract token if 'Bearer <token>' format is used
+    const token = authHeader.split(' ')[1]; 
     if (!token) {
         return res.status(403)
             .json({ message: 'Unauthorized, JWT token is required' });

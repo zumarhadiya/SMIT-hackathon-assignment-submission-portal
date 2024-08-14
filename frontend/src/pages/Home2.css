@@ -1,10 +1,9 @@
-/* Home2.css */
 
 .hero-section {
     text-align: center;
     padding: 50px 20px;
-    background-color: #f0f8ff; /* Light background color for contrast */
-    margin-top: 60px; /* Space for the fixed navbar */
+    background-color: #f0f8ff; 
+    margin-top: 60px;
 }
 
 .dashboard-features {
@@ -27,7 +26,7 @@
 
 .feature-card h2 {
     font-size: 1.75rem;
-    color: #0077cc; /* Blue color for the headings */
+    color: #0077cc; 
     margin-bottom: 10px;
 }
 
@@ -42,7 +41,7 @@
     padding: 10px 20px;
     font-size: 1rem;
     color: #fff;
-    background: linear-gradient(135deg, #0077cc, #00bfae); /* Blue-green gradient */
+    background: linear-gradient(135deg, #0077cc, #00bfae); 
     border-radius: 5px;
     text-decoration: none;
     transition: background 0.3s, transform 0.3s;
@@ -92,7 +91,7 @@
     padding: 10px 20px;
     font-size: 1rem;
     color: #fff;
-    background: #0077cc; /* Blue color */
+    background: #0077cc; 
     border-radius: 5px;
     text-decoration: none;
     margin: 5px;
@@ -108,7 +107,7 @@
 }
 
 .modal-close-button {
-    background: #ff4d4d; /* Red color for close button */
+    background: #ff4d4d; 
     border: none;
     padding: 10px 20px;
     color: white;
@@ -121,9 +120,6 @@
     background: #e60000;
 }
 
-/* Existing CSS from Home2.css */
-
-/* Modal Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -155,7 +151,7 @@
 .modal-button {
     display: block;
     padding: 10px;
-    background-color: #0077cc; /* Blue */
+    background-color: #0077cc; 
     color: #ffffff;
     text-align: center;
     text-decoration: none;
@@ -164,11 +160,11 @@
 }
 
 .modal-button:hover {
-    background-color: #005fa3; /* Darker blue */
+    background-color: #005fa3; 
 }
 
 .modal-close-button {
-    background-color: #ff4d4d; /* Red for close */
+    background-color: #ff4d4d;
     color: #ffffff;
     border: none;
     padding: 10px;
@@ -176,3 +172,11 @@
     cursor: pointer;
     margin-top: 10px;
 }
+
+@media (max-width: 768px) {
+  
+    .feature-button{
+      margin-right: 0px;
+      padding: 10px 10px;
+    }
+  }

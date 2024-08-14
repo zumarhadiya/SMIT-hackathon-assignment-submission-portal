@@ -4,7 +4,7 @@ const UserModel = require("../Models/User");
 
 const signup = async (req, res) => {
     try {
-        const { name, email, password, userType } = req.body; // Include userType
+        const { name, email, password, userType } = req.body; 
         const user = await UserModel.findOne({ email });
         if (user) {
             return res.status(409)
@@ -15,7 +15,7 @@ const signup = async (req, res) => {
             name,
             email,
             password: hashedPassword,
-            userType // Store userType
+            userType 
         });
         await newUser.save();
         res.status(201)
@@ -47,7 +47,7 @@ const login = async (req, res) => {
                 .json({ message: errorMsg, success: false });
         }
         const jwtToken = jwt.sign(
-            { email: user.email, _id: user._id, userType: user.userType }, // Include userType in JWT payload
+            { email: user.email, _id: user._id, userType: user.userType },
             process.env.JWT_SECRET,
             { expiresIn: '24h' }
         );
@@ -59,7 +59,7 @@ const login = async (req, res) => {
                 jwtToken,
                 email,
                 name: user.name,
-                userType: user.userType // Include userType in the response
+                userType: user.userType 
             });
     } catch (err) {
         res.status(500)

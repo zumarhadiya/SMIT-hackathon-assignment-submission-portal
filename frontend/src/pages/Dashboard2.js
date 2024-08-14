@@ -29,7 +29,6 @@ const Dashboard2 = () => {
   };
 
   const handleSubmit = (assignmentId) => {
-    // Validation: Check if a file or link is provided
     if (submissionType === 'file' && !selectedFile) {
       setErrorMessage('A file is required for submission.');
       return;

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
-import './Home2.css'; // Reuse the same CSS for consistency
+import './Home2.css'; 
 import { Link } from 'react-router-dom';
 
 function Home() {
-    const [isModalOpen, setIsModalOpen] = useState(null); // Null, 'view' or 'submit' to control modal type
+    const [isModalOpen, setIsModalOpen] = useState(null); 
 
     const handleOpenModal = (type) => {
         setIsModalOpen(type);
@@ -33,7 +33,6 @@ function Home() {
                 </div>
             </section>
 
-            {/* Modal for course selection */}
             {isModalOpen && (
                 <div className="modal-overlay">
                     <div className="modal-content">

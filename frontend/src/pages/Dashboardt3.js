@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../App.css';
-import Navbar from '../components/Navbar';
 import Navbar2 from '../components/Navbar2';
 
 const Dashboardt3 = () => {
@@ -53,13 +52,11 @@ const Dashboardt3 = () => {
     }
 
     if (editAssignment) {
-      // Edit existing assignment
       setAssignments(assignments.map((assignment) =>
         assignment.id === editAssignment.id ? { ...newAssignment, id: editAssignment.id } : assignment
       ));
       setEditAssignment(null);
     } else {
-      // Add new assignment
       setAssignments([...assignments, {
         ...newAssignment,
         id: Date.now(),
@@ -104,7 +101,7 @@ const Dashboardt3 = () => {
     <>
       <Navbar2 />
       <div className="dashboard-container">
-        <h2>Manage Assignments for Ai & Chatbot</h2>
+        <h2>Manage Assignments for AI & Chatbot</h2>
 
         <div className="new-assignment-form">
           <h3>{editAssignment ? 'Edit Assignment' : 'Post New Assignment'}</h3>
@@ -132,21 +129,17 @@ const Dashboardt3 = () => {
               <option value="link">Link</option>
             </select>
           </label>
-          {/* {newAssignment.submissionType === 'file' && (
-            <input
-              type="file"
-              onChange={handleFileChange}
-              accept=".pdf, .doc, .docx, .xls, .xlsx, .txt" // Adjust file types as needed
-            />
-          )}
-          {newAssignment.submissionType === 'link' && (
+          {newAssignment.submissionType === 'file' ? (
+            <input type="file" name="file" onChange={handleFileChange} />
+          ) : (
             <input
               type="text"
+              name="link"
               value={newAssignment.link}
               onChange={handleLinkChange}
-              placeholder="Enter assignment link"
+              placeholder="Submission Link"
             />
-          )} */}
+          )}
           <textarea
             name="description"
             value={newAssignment.description}
@@ -180,6 +173,17 @@ const Dashboardt3 = () => {
                   <p><strong>Deadline:</strong> {assignment.deadline}</p>
                   <p><strong>Description:</strong> {assignment.description}</p>
                   <p><strong>Submission Type:</strong> {assignment.submissionType}</p>
+                  {assignment.file && (
+                    <div className="download-section">
+                      <a
+                        href={URL.createObjectURL(assignment.file)}
+                        download={assignment.file.name}
+                        className="download-button"
+                      >
+                        Download File
+                      </a>
+                    </div>
+                  )}
                   <div className="assignment-actions">
                     <button className='button' onClick={() => handleEdit(assignment.id)}>Edit</button>
                     <button className='button' onClick={() => handleDelete(assignment.id)}>Delete</button>

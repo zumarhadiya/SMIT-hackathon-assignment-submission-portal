@@ -15,10 +15,10 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    userType: {   // New field for user type
+    userType: {  
         type: String,
         required: true,
-        enum: ['student', 'teacher'] // Ensures only 'student' or 'teacher' can be assigned
+        enum: ['student', 'teacher'] 
     }
 });
 

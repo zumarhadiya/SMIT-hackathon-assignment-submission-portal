@@ -20,7 +20,6 @@ const RefrshHandler = ({ setIsAuthenticated }) => {
             }
         } else {
             setIsAuthenticated(false);
-            // Allow access to login and signup pages without redirection
             if (location.pathname !== '/login' && location.pathname !== '/signup') {
                 navigate('/login');
             }

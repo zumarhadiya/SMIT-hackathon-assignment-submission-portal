@@ -1,6 +1,5 @@
-/* Container Styles */
 .container {
-    background-color: #f0f4f8; /* Light blueish background */
+    background-color: #f0f4f8; 
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -9,7 +8,6 @@
     text-align: center;
   }
   
-  /* Logo Styles */
   .smit-logo {
     display: block;
     margin: 0 auto 20px;
@@ -17,9 +15,8 @@
     height: auto;
   }
   
-  /* Form Header */
   h1 {
-    color: #2a9d8f; /* Darker green */
+    color: #2a9d8f; 
     margin-bottom: 20px;
   }
   
@@ -31,7 +28,6 @@
     font-weight: bold;
   }
   
-  /* Input Fields */
   input[type="text"],
   input[type="email"],
   input[type="password"],
@@ -51,14 +47,13 @@
   input[type="email"]:focus,
   input[type="password"]:focus,
   select:focus {
-    border-color: #2a9d8f; /* Darker green focus */
+    border-color: #2a9d8f; 
   }
   
-  /* Button Styles */
   button[type="submit"] {
     width: 100%;
     padding: 10px 20px;
-    background: linear-gradient(135deg, #4CAF50, #2a9d8f); /* Two-toned green/blue button */
+    background: linear-gradient(135deg, #4CAF50, #2a9d8f); 
     color: white;
     border: none;
     border-radius: 5px;
@@ -68,11 +63,10 @@
   }
   
   button[type="submit"]:hover {
-    background: linear-gradient(135deg, #2a9d8f, #4CAF50); /* Reverse two-toned colors on hover */
+    background: linear-gradient(135deg, #2a9d8f, #4CAF50); 
     transform: scale(1.05);
   }
   
-  /* Link Styles */
   span {
     display: block;
     margin-top: 15px;
@@ -80,13 +74,13 @@
   }
   
   span a {
-    color: #1E90FF; /* Blue color for link */
+    color: #1E90FF; 
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
   }
   
   span a:hover {
-    color: #2a9d8f; /* Green color on hover */
+    color: #2a9d8f; 
   }
   

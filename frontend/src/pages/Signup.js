@@ -1,32 +1,44 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from '../utils';
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.png';
 import './signup.css';
 
+const studentCode = 'student1234'; 
+const teacherCode = 'missFaiza1122'; 
 function Signup() {
     const [signupInfo, setSignupInfo] = useState({
         name: '',
         email: '',
         password: '',
-        userType: ''  // New state for user type
-    })
+        userType: '',
+        code: ''  
+    });
 
     const navigate = useNavigate();
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
-        const copySignupInfo = { ...signupInfo };
-        copySignupInfo[name] = value;
-        setSignupInfo(copySignupInfo);
+        setSignupInfo(prev => ({ ...prev, [name]: value }));
     }
 
     const handleSignup = async (e) => {
         e.preventDefault();
-        const { name, email, password, userType } = signupInfo;
+        const { name, email, password, userType, code } = signupInfo;
+        
         if (!name || !email || !password || !userType) {
-            return handleError('All fields are required')
+            return handleError('All fields are required');
         }
+        
+        if (userType === 'teacher' && code !== teacherCode) {  
+            return handleError('Invalid teacher code');
+        }
+
+        if (userType === 'student' && code !== studentCode) {
+            return handleError('Invalid student code');
+        }
+
         try {
             const url = `http://localhost:8080/auth/signup`;
             const response = await fetch(url, {
@@ -34,15 +46,16 @@ function Signup() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(signupInfo)
+                body: JSON.stringify({ name, email, password, userType }) 
             });
             const result = await response.json();
             const { success, message, error } = result;
+
             if (success) {
                 handleSuccess(message);
                 setTimeout(() => {
                     navigate('/login')
-                }, 1000)
+                }, 1000);
             } else if (error) {
                 const details = error?.details[0].message;
                 handleError(details);
@@ -56,7 +69,7 @@ function Signup() {
 
     return (
         <>
-            <img className='smit-logo' src={logo} />
+            <img className='smit-logo' src={logo} alt="Logo" />
             <div className='container'>
                 <h1>Signup</h1>
                 <form onSubmit={handleSignup}>
@@ -103,8 +116,22 @@ function Signup() {
                             <option value='teacher'>Teacher</option>
                         </select>
                     </div>
+                    {(signupInfo.userType === 'teacher' || signupInfo.userType === 'student') && (
+                        <div>
+                            <label htmlFor='code'>
+                                {signupInfo.userType === 'teacher' ? 'Teacher Code' : 'Student Code'}
+                            </label>
+                            <input
+                                onChange={handleChange}
+                                type='text'
+                                name='code'
+                                placeholder={`Enter ${signupInfo.userType === 'teacher' ? 'teacher' : 'student'} code...`}
+                                value={signupInfo.code}
+                            />
+                        </div>
+                    )}
                     <button type='submit'>Signup</button>
-                    <span>Already have an account?
+                    <span>Already have an account? 
                         <Link to="/login">Login</Link>
                     </span>
                 </form>
