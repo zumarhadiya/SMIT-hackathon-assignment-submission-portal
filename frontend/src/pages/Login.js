@@ -43,7 +43,7 @@ function Login() {
         }
 
         try {
-            const url = `https://smit-hackathon-assignment-submission-portal-rwpx.vercel.app//auth/login`;
+            const url = `http://localhost:8080/auth/login`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
