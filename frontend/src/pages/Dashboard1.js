@@ -93,6 +93,9 @@ const Dashboard1 = () => {
           </label>
         </div>
 
+        {/* Display error message if present */}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+
         <div className="assignments-section">
           <h3>{filter.charAt(0).toUpperCase() + filter.slice(1)} Assignments</h3>
           {filteredAssignments.length > 0 ? (
