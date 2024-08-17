@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from '../components/Navbar';
+// import Navbar from '../components/Navbar';
 import './Home2.css';
 import { Link } from 'react-router-dom';
 import Navbar2 from '../components/Navbar2';

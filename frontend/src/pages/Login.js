@@ -43,7 +43,7 @@ function Login() {
         }
 
         try {
-            const url = `http://localhost:8080/auth/login`;
+            const url = `https://assignment-lemon-zeta.vercel.app/auth/login`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
