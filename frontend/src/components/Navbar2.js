@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import logo from '../assets/logo.png';
 import './navbar.css'; 
 
+
 const Navbar2 = () => {
     const [loggedInUser, setLoggedInUser] = useState('');
     const [sidebarOpen, setSidebarOpen] = useState(false);
